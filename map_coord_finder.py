@@ -6,12 +6,12 @@ import requests
 
 api_server = "http://static-maps.yandex.ru/1.x/"
 
-lon, lat = map(float, sys.argv[1:])
-delta = "0.01"
+lon, lat, delta = map(float, sys.argv[1:])
+
 
 params = {
     "ll": ",".join([str(lat), str(lon)]),
-    "spn": ",".join([delta, delta]),
+    "spn": ",".join([str(delta), str(delta)]),
     "l": "map"
 }
 response = requests.get(api_server, params=params)
