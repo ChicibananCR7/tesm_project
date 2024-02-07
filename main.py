@@ -10,8 +10,9 @@ def update():
 
     params = {
         "ll": ",".join([str(lat), str(lon)]),
-        "l": "map",
-        "z": str(z)
+        "l": lf,
+        "z": str(z),
+        "controls": ['trolololo']
     }
     response = requests.get(api_server, params=params)
     if not response:
@@ -26,7 +27,8 @@ def update():
 api_server = "http://static-maps.yandex.ru/1.x/"
 
 lon, lat = map(float, sys.argv[1:3])
-z = str(sys.argv[-1])
+z = int(sys.argv[-1]) if 0 < int(sys.argv[-1]) < 21 else 5
+lf = "map"
 params = {
     "ll": ",".join([str(lat), str(lon)]),
     "l": "map",
@@ -62,6 +64,24 @@ while pygame.event.wait().type != pygame.QUIT:
 
     if keys[pygame.K_PAGEDOWN]:
         z = z - 1 if z > 0 else z
+        update()
+        screen.blit(pygame.image.load(update()), (0, 0))
+        pygame.display.flip()
+
+    if keys[pygame.K_1]:
+        lf = "map"
+        update()
+        screen.blit(pygame.image.load(update()), (0, 0))
+        pygame.display.flip()
+
+    if keys[pygame.K_2]:
+        lf = "sat"
+        update()
+        screen.blit(pygame.image.load(update()), (0, 0))
+        pygame.display.flip()
+
+    if keys[pygame.K_3]:
+        lf = "sat,skl"
         update()
         screen.blit(pygame.image.load(update()), (0, 0))
         pygame.display.flip()
