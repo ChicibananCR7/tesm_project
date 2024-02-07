@@ -25,7 +25,8 @@ def update():
     return map_file
 api_server = "http://static-maps.yandex.ru/1.x/"
 
-lon, lat, delta = map(float, sys.argv[1:])
+lon, lat = map(float, sys.argv[1:3])
+z = str(sys.argv[-1])
 params = {
     "ll": ",".join([str(lat), str(lon)]),
     "l": "map",
