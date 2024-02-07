@@ -51,20 +51,20 @@ screen.blit(pygame.image.load(map_file), (0, 0))
 # Переключаем экран и ждем закрытия окна.
 pygame.display.flip()
 while pygame.event.wait().type != pygame.QUIT:
-
+    screen.blit(pygame.image.load(map_file), (0, 0))
+    pygame.display.flip()
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.KSCAN_PAGEDOWN]:
-        print('sdfjsdof', delta, z)
-        z += 1
+    if keys[pygame.K_PAGEUP]:
+        z = z + 1 if z < 21 else z
         screen.blit(pygame.image.load(update()), (0, 0))
         pygame.display.flip()
 
-    if keys[pygame.KSCAN_PAGEUP]:
-        z -= 1
-        print('вшыа9фырва', delta, z)
+    if keys[pygame.K_PAGEDOWN]:
+        z = z - 1 if z > 0 else z
         update()
         screen.blit(pygame.image.load(update()), (0, 0))
         pygame.display.flip()
+
 pygame.quit()
 os.remove(map_file)
